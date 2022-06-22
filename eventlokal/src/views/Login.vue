@@ -9,7 +9,7 @@
             <div class="mb-md-5 mt-md-4 pb-5">
 
               <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
-              <p class="text-white-50 mb-5">Please enter your login and password!</p>
+              <p class="text-white-50 mb-3">Please enter your login and password!</p>
 
               <div class="form-outline form-white mb-4">
                 <input type="email" id="typeEmailX" class="form-control form-control-lg" v-model="email"/>
@@ -23,8 +23,8 @@
 
               <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p>
 
-              <button class="btn btn-outline-light btn-lg px-5" @submit.prevent="login">Login</button>
-              <button class="btn btn-outline-light btn-lg px-5">Register</button>
+              <button class="btn btn-outline-light btn-lg px-5" @click="login">Login</button>
+              <button class="btn btn-outline-light btn-lg px-5" @click="toRegister">Register</button>
 
             
 
@@ -39,6 +39,10 @@
 </template>
 
 <script>
+
+import {mapActions} from 'pinia'
+import {useMainStore} from '../stores'
+import router from "../router/index";
 export default {
   data() {
     return {
@@ -47,8 +51,14 @@ export default {
     }
   },
   methods: {
-    login: function () {
-
+     ...mapActions(useMainStore, { loginAction: "login" }),
+    login: function (email,password) {
+        this.loginAction(
+        this.email,
+        this.password)
+    },
+    toRegister: function() {
+      router.push('/register')
     }
   }
 }
