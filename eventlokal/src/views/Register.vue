@@ -81,13 +81,20 @@ export default {
   },
   methods: {
     ...mapActions(useMainStore, { registerAction: "register" }),
-    register: function () {
-      this.registerAction(
-        this.email,
-        this.password,
-        this.phoneNumber,
-        this.name
-      );
+    register: async function () {
+      try {
+        await this.registerAction(
+          this.email,
+          this.password,
+          this.phoneNumber,
+          this.name
+        );
+        Swal.fire("REGISTERED!", "", "success");
+        this.$router.push("/login");
+      } catch (err) {
+        console.log(err);
+        Swal.fire("ERROR!", `${err.response.data.message}`, "error");
+      }
     },
   },
 };

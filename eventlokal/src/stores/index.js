@@ -6,39 +6,75 @@ export const useMainStore = defineStore({
     events: [],
     myEvents: [],
     isLogin: false,
+    page: 'home'
   }),
   getters: {},
   actions: {
     register: async function (email, password, name, phoneNumber) {
-      try {
-        const response = await axios({
-          url: "http://localhost:3000/register",
-          method: "POST",
-          data: {
-            email,
-            password,
-            name,
-            phoneNumber,
-          },
-        });
+      return new Promise(async (resolve, reject) => {
+        try {
+          const response = await axios({
+            url: "https://eventlokal.herokuapp.com/register",
+            method: "POST",
+            data: {
+              email,
+              password,
+              name,
+              phoneNumber,
+            },
+          });
 
-        console.log(response);
-        Swal.fire("REGISTERED!", "You clicked the button!", "success");
-        router.push("/login");
-      } catch (err) {
-        console.log(err);
-        await Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Something went wrong!",
-        });
-      }
+          console.log(response);
+        
+          resolve();
+        } catch (err) {
+          reject(err);
+          console.log(err);
+        }
+      });
+    },
+    addEvent: async function (
+      name,
+      type,
+      description,
+      location,
+      time,
+      date,
+      imgUrl
+    ) {
+      return new Promise(async (resolve, reject) => {
+        try {
+          const access_token = localStorage.getItem("access_token");
+          const response = await axios({
+            url: "https://eventlokal.herokuapp.com/event",
+            method: "POST",
+            headers: {
+              access_token,
+            },
+            data: {
+              name,
+              type,
+              description,
+              location,
+              time,
+              date,
+              imgUrl,
+            },
+          });
+          console.log(response);
+          Swal.fire("REGISTERED!", "You clicked the button!", "success");
+          resolve();
+        } catch (err) {
+          reject(err);
+          console.log(err);
+        }
+      });
     },
     login: async function (email, password) {
       return new Promise(async (resolve, reject) => {
         try {
           const response = await axios({
-            url: "http://localhost:3000/login",
+            url: "https://eventlokal.herokuapp.com/login",
             method: "POST",
             data: {
               email,
@@ -59,7 +95,7 @@ export const useMainStore = defineStore({
       return new Promise(async (resolve, reject) => {
         try {
           localStorage.clear();
-          this.isLogin = false
+          this.isLogin = false;
           resolve();
         } catch (err) {
           reject(err.response.data);
@@ -71,7 +107,7 @@ export const useMainStore = defineStore({
         try {
           const access_token = localStorage.getItem("access_token");
           const result = await axios({
-            url: `http://localhost:3000/myevent/${id}`,
+            url: `https://eventlokal.herokuapp.com/myevent/${id}`,
             method: "POST",
             headers: {
               access_token,
@@ -87,7 +123,7 @@ export const useMainStore = defineStore({
       return new Promise(async (resolve, reject) => {
         try {
           const result = await axios({
-            url: "http://localhost:3000/event",
+            url: "https://eventlokal.herokuapp.com/event",
             method: "GET",
           });
           this.events = result.data.data;
@@ -103,7 +139,7 @@ export const useMainStore = defineStore({
         try {
           const access_token = localStorage.getItem("access_token");
           const result = await axios({
-            url: "http://localhost:3000/myevent",
+            url: "https://eventlokal.herokuapp.com/myevent",
             method: "GET",
             headers: {
               access_token,
@@ -118,7 +154,7 @@ export const useMainStore = defineStore({
       });
     },
     setIsLogin: function (status = false) {
-      this.isLogin = status
-    }
+      this.isLogin = status;
+    },
   },
 });

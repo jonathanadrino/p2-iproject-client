@@ -1,5 +1,5 @@
 <template>
-  <div class="card mb-3 mt-4" style="max-width: 540px">
+  <div class="card mb-3 mt-7 " style="max-width: 540px">
     <div class="row g-0">
       <div class="col-md-4">
         <img :src="event.imgUrl" class="img-fluid rounded-start" alt="..." />
@@ -23,6 +23,14 @@
             @click="addEvent(event.id)"
           >
             Follow
+          </button>
+          <button
+          v-if="page !== 'home'"
+            type="button"
+            class="btn-dark btn-secondary btn-sm mb-3"
+            @click="addEvent(event.id)"
+          >
+            Unfollow
           </button>
         </div>
       </div>
@@ -57,6 +65,9 @@ export default {
         this.$router.push("/login");
       }
     },
+  },
+   computed: {
+    ...mapState(useMainStore,['page'])
   },
 };
 </script>

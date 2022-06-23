@@ -12,23 +12,23 @@
                 </p>
 
                 <div class="form-outline form-white mb-4">
+                  <label class="form-label" for="typeEmailX">Email</label>
                   <input
                     type="email"
                     id="typeEmailX"
                     class="form-control form-control-lg"
                     v-model="email"
                   />
-                  <label class="form-label" for="typeEmailX">Email</label>
                 </div>
 
                 <div class="form-outline form-white mb-4">
+                  <label class="form-label" for="typePasswordX">Password</label>
                   <input
                     type="password"
                     id="typePasswordX"
                     class="form-control form-control-lg"
                     v-model="password"
                   />
-                  <label class="form-label" for="typePasswordX">Password</label>
                 </div>
 
                 <p class="small mb-5 pb-lg-2">

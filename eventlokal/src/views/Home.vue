@@ -1,7 +1,7 @@
 <template>
-<center>
+  <center>
     <Card v-for="event in events" :key="event.id" :event="event" />
-</center>
+  </center>
 </template>
 
 <script>
@@ -18,8 +18,8 @@ export default {
   },
   created: async function () {
     try {
-        await this.fetchEvents();
-        console.log(this.fetchEvents);
+      await this.fetchEvents();
+      console.log(this.fetchEvents);
     } catch (err) {
       console.log(err);
     }

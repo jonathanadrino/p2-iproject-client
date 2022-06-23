@@ -1,9 +1,9 @@
 <script></script>
 
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">EVENTLOKAL</a>
+      <a class="navbar-brand" @click="toHome">EVENTLOKAL</a>
       <button
         class="navbar-toggler"
         type="button"
@@ -26,18 +26,21 @@
           <li class="nav-item">
             <a class="nav-link" @click="toMyEvent">My Event</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" @click="toAdd">Add Event</a>
+          </li>
         </ul>
         <p>{{}}</p>
-        <form class="d-flex">
+        <form class="d-flex me-3">
           <input
             class="form-control me-2"
             type="search"
             placeholder="Search"
             aria-label="Search"
           />
-          <button class="btn btn-outline-success" type="submit">Search</button>
+          <button class="btn btn-outline-light" type="submit">Search</button>
         </form>
-        <a class="nav-link me-2" @click="toLogout" v-if="isLogin">Logout</a>
+        <a class="text-white text-darknav-link me-2" @click="toLogout" v-if="isLogin">Logout</a>
       </div>
     </div>
   </nav>
@@ -60,6 +63,13 @@ export default {
     toMyEvent: function () {
       if (localStorage.getItem("access_token")) {
         this.$router.push("/myevent");
+      } else {
+        this.$router.push("/login");
+      }
+    },
+    toAdd: function () {
+      if (localStorage.getItem("access_token")) {
+        this.$router.push("/add");
       } else {
         this.$router.push("/login");
       }

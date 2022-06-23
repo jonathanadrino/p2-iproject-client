@@ -1,7 +1,7 @@
 <template>
-<center>
+  <center>
     <Card v-for="event in myEvents" :key="event.id" :event="event" />
-</center>
+  </center>
 </template>
 
 <script>
@@ -18,14 +18,14 @@ export default {
   },
   created: async function () {
     try {
-        await this.fetchMyEvents();
-        console.log(this.fetchMyEvents);
+      await this.fetchMyEvents();
+      console.log(this.fetchMyEvents);
     } catch (err) {
       console.log(err);
     }
   },
   computed: {
-    ...mapState(useMainStore, ["myEvents"]),
+    ...mapState(useMainStore, ["myEvents", "page"]),
   },
 };
 </script>
