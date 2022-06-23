@@ -14,7 +14,7 @@ export const useMainStore = defineStore({
       return new Promise(async (resolve, reject) => {
         try {
           const response = await axios({
-            url: "https://eventlokal.herokuapp.com/register",
+            url: "http://localhost:3000/register",
             method: "POST",
             data: {
               email,
@@ -46,7 +46,7 @@ export const useMainStore = defineStore({
         try {
           const access_token = localStorage.getItem("access_token");
           const response = await axios({
-            url: "https://eventlokal.herokuapp.com/event",
+            url: "http://localhost:3000/event",
             method: "POST",
             headers: {
               access_token,
@@ -74,7 +74,7 @@ export const useMainStore = defineStore({
       return new Promise(async (resolve, reject) => {
         try {
           const response = await axios({
-            url: "https://eventlokal.herokuapp.com/login",
+            url: "http://localhost:3000/login",
             method: "POST",
             data: {
               email,
@@ -107,7 +107,7 @@ export const useMainStore = defineStore({
         try {
           const access_token = localStorage.getItem("access_token");
           const result = await axios({
-            url: `https://eventlokal.herokuapp.com/myevent/${id}`,
+            url: `http://localhost:3000/myevent/${id}`,
             method: "POST",
             headers: {
               access_token,
@@ -123,7 +123,7 @@ export const useMainStore = defineStore({
       return new Promise(async (resolve, reject) => {
         try {
           const result = await axios({
-            url: "https://eventlokal.herokuapp.com/event",
+            url: "http://localhost:3000/event",
             method: "GET",
           });
           this.events = result.data.data;
@@ -139,7 +139,7 @@ export const useMainStore = defineStore({
         try {
           const access_token = localStorage.getItem("access_token");
           const result = await axios({
-            url: "https://eventlokal.herokuapp.com/myevent",
+            url: "http://localhost:3000/myevent",
             method: "GET",
             headers: {
               access_token,
