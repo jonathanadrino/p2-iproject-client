@@ -6,7 +6,7 @@ export const useMainStore = defineStore({
     events: [],
     myEvents: [],
     isLogin: false,
-    page: 'home'
+    page: 'home',
   }),
   getters: {},
   actions: {
@@ -14,7 +14,7 @@ export const useMainStore = defineStore({
       return new Promise(async (resolve, reject) => {
         try {
           const response = await axios({
-            url: "http://localhost:3000/register",
+            url: "https://eventlokal.herokuapp.com/register",
             method: "POST",
             data: {
               email,
@@ -46,7 +46,7 @@ export const useMainStore = defineStore({
         try {
           const access_token = localStorage.getItem("access_token");
           const response = await axios({
-            url: "http://localhost:3000/event",
+            url: "https://eventlokal.herokuapp.com/event",
             method: "POST",
             headers: {
               access_token,
@@ -74,7 +74,7 @@ export const useMainStore = defineStore({
       return new Promise(async (resolve, reject) => {
         try {
           const response = await axios({
-            url: "http://localhost:3000/login",
+            url: "https://eventlokal.herokuapp.com/login",
             method: "POST",
             data: {
               email,
@@ -107,7 +107,7 @@ export const useMainStore = defineStore({
         try {
           const access_token = localStorage.getItem("access_token");
           const result = await axios({
-            url: `http://localhost:3000/myevent/${id}`,
+            url: `https://eventlokal.herokuapp.com/${id}`,
             method: "POST",
             headers: {
               access_token,
@@ -123,7 +123,7 @@ export const useMainStore = defineStore({
       return new Promise(async (resolve, reject) => {
         try {
           const result = await axios({
-            url: "http://localhost:3000/event",
+            url: "https://eventlokal.herokuapp.com/event",
             method: "GET",
           });
           this.events = result.data.data;
@@ -139,7 +139,7 @@ export const useMainStore = defineStore({
         try {
           const access_token = localStorage.getItem("access_token");
           const result = await axios({
-            url: "http://localhost:3000/myevent",
+            url: "https://eventlokal.herokuapp.com/myevent",
             method: "GET",
             headers: {
               access_token,

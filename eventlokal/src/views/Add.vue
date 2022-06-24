@@ -1,4 +1,7 @@
 <template>
+<center>
+  <div style="color:white; background-color: black;"><h3>Pin location here</h3></div>
+</center>
   <div class="container-fluid px-1 mx-auto">
     <div class="row d-flex justify-content-center">
       <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
@@ -97,6 +100,7 @@
                 />
               </div>
             </div>
+            
             <div class="row justify-content-end">
               <div class="form-group col-sm-6">
                 <button type="submit" class="btn-block btn-primary">
@@ -109,12 +113,19 @@
       </div>
     </div>
   </div>
+  <div class="map">
+                  <AddMap></AddMap>
+            </div>
 </template>
 
 <script>
 import { mapActions } from "pinia";
 import { useMainStore } from "../stores";
+import AddMap from "../components/AddMap.vue";
 export default {
+  components: {
+    AddMap
+  },
   data() {
     return {
       name: "",
@@ -150,6 +161,7 @@ export default {
 </script>
 <style>
 body {
+  margin-top: 20%;
   color: #000;
   overflow-x: hidden;
   height: 100%;

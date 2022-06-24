@@ -1,17 +1,25 @@
 <template>
-  <center>
+<center>
+  <div style="color:white; background-color: black;"><h3>Events locations</h3></div>
+  <div class="map-home">
+    <Map></Map>
+  </div>
+  <div class="card-row">
+    <!-- card -->
     <Card v-for="event in events" :key="event.id" :event="event" />
-  </center>
+  </div>
+</center>
 </template>
 
 <script>
 import Card from "../components/Card.vue";
+import Map from "../components/Map.vue";
 import { mapActions, mapState } from "pinia";
 import { useMainStore } from "../stores";
-
 export default {
   components: {
     Card,
+    Map,
   },
   methods: {
     ...mapActions(useMainStore, ["fetchEvents"]),
@@ -32,6 +40,6 @@ export default {
 
 <style>
 .card-row {
-  padding-top: 3%;
+  margin-top: -5%;
 }
 </style>
